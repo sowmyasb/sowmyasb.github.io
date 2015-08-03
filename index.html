@@ -158,7 +158,7 @@ return performance.now()-start;
 }
 
 var single=0, enumer = 0, divided =0;
-for (var i=1;i<=20;i++){
+for (var i=1;i<=20000;i++){
 single+=normalLoop();
 enumer+=enumeratedLoop();
 divided+=dividedLoop();
