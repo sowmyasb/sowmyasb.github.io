@@ -25,6 +25,125 @@ for(var i=0;i<size;i++){
 
 console.log(performance.now()-start);
 
+</script>
+
+<script>
+var start=performance.now();
+
+var size =2000;
+
+var s=16;
+
+var ar = new Array(s);
+
+for(var i =0;i<s;i++){
+
+    ar[i]=new Array(size);
+
+}
+
+for(var i=0;i<size;i++){
+
+     for(var j=0;j<s;j++){
+
+     ar[j][i]=i;
+
+    }
+
+}
+
+console.log(performance.now()-start);
+
+
+
+
+
+
+
+var start=performance.now();
+
+var size =2000;
+
+var s=16;
+
+
+
+var ar1 = new Array(size);
+
+for(var i =0;i<s;i++){
+
+   ar1[i]=new Array(size);
+
+}
+
+for(var i=0;i<size;i++){
+
+ar1[0][i]=i;
+
+ar1[1][i]=i;
+
+ar1[2][i]=i;
+
+ar1[3][i]=i;
+
+ar1[4][i]=i;
+
+ar1[5][i]=i;
+
+ar1[6][i]=i;
+
+ar1[7][i]=i;
+
+ar1[8][i]=i;
+
+ar1[9][i]=i;
+
+ar1[10][i]=i;
+
+ar1[11][i]=i;
+
+ar1[12][i]=i;
+
+ar1[13][i]=i;
+
+ar1[14][i]=i;
+
+ar1[15][i]=i;
+
+}
+
+console.log(performance.now()-start);
+
+
+</script>
+
+<script>
+var start=performance.now();
+
+var size =2000;
+
+var s=16;
+
+var ar = new Array(s);
+
+for(var i =0;i<s;i++){
+
+    ar[i]=new Array(size);
+
+}
+
+for(var i=0;i<size;i++){
+
+     for(var j=0;j<s;j++){
+
+     ar[j][i]=i;
+
+    }
+
+}
+
+console.log(performance.now()-start);
+
 
 
 
