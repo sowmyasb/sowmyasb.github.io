@@ -1,4 +1,5 @@
 <script>
+console.log('single loop');
 var start=performance.now();
 
 var size =2000;
@@ -28,6 +29,7 @@ console.log(performance.now()-start);
 </script>
 
 <script>
+console.log('single loop vs enumerated loop');
 var start=performance.now();
 
 var size =2000;
@@ -118,6 +120,7 @@ console.log(performance.now()-start);
 </script>
 
 <script>
+console.log('single loop vs enumerated vs divided loop');
 var start=performance.now();
 
 var size =2000;
