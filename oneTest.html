@@ -1,0 +1,28 @@
+<script>
+var start=performance.now();
+
+var size =2000;
+
+var s=16;
+
+var ar = new Array(s);
+
+for(var i =0;i<s;i++){
+
+    ar[i]=new Array(size);
+
+}
+
+for(var i=0;i<size;i++){
+
+     for(var j=0;j<s;j++){
+
+     ar[j][i]=i;
+
+    }
+
+}
+
+console.log(performance.now()-start);
+
+</script>
