@@ -6,9 +6,36 @@
 <p>Single loop<span id="a"></span></p>
 <p>Enumerated loop<span id="b"></span></p>
 <p>divided loop<span id="c"></span></p>
+<p>One for loop<span id="d"></span></p>
+<p>Block One for loop<span id="e"></span></p>
  </body>
   <script>
 console.log('single loop');
+function singleLoop(){
+
+var start = performance.now();
+var arr = new Array(1000000);
+for (var i = 0; i < arr.length;  i = i + 5) {
+ arr[i] = i;
+ arr[i + 1] = i + 1;
+ arr[i + 2] = i + 2;
+ arr[i + 3] = i + 3;
+ arr[i + 4] = i + 4;
+}
+return performance.now() - start;
+}
+function singleBlockLoop(){
+	
+var start = performance.now();
+var arr = new Array(1000000);
+for (var i = 0; i < arr.length;  i = i + 1) {
+ arr[i] = i;
+}
+return performance.now() - start;
+
+}
+
+
 function normalLoop () {
 var start=performance.now();
 
@@ -181,8 +208,12 @@ ar[15][i]=i;
 return performance.now()-start;
 }
 
-var single=0, enumer = 0, divided =0;
+var single=0, enumer = 0, divided =0, one=0, blockOne=0;
 for (var i=1;i<=200;i++){
+blockOne += singleBlockLoop();
+one += singleLoop();
+
+
 single+=normalLoop();
 enumer+=enumeratedLoop();
 divided+=dividedLoop();
@@ -207,6 +238,9 @@ single+=normalLoop();
 enumer+=enumeratedLoop();
 single+=normalLoop();
 divided+=dividedLoop();
+
+one += singleLoop();
+blockOne += singleBlockLoop();
 }
 
 /*single/=120;
@@ -215,5 +249,7 @@ divided/=120;*/
 document.getElementById('a').innerHTML = " = "+single;
 document.getElementById('b').innerHTML = " = "+enumer;
 document.getElementById('c').innerHTML = " = "+divided;
+document.getElementById('d').innerHTML = " = "+one;
+document.getElementById('e').innerHTML = " = "+blockOne;
 </script>
 </html>
