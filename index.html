@@ -11,49 +11,53 @@
  </body>
   <script>
 console.log('single loop');
+var array = new Array(2000);
+
 function singleBlockLoop(){
 
 var start = performance.now();
-var arr = new Array(1000000);
-for (var i = 0; i < arr.length;  i = i + 5) {
- arr[i] = i;
- arr[i + 1] = i + 1;
- arr[i + 2] = i + 2;
- arr[i + 3] = i + 3;
- arr[i + 4] = i + 4;
+for (var i = 0; i < array.length;  i = i + 5) {
+ array[i] = i;
+ array[i + 1] = i + 1;
+ array[i + 2] = i + 2;
+ array[i + 3] = i + 3;
+ array[i + 4] = i + 4;
 }
 return performance.now() - start;
 }
 function singleLoop(){
 	
 var start = performance.now();
-var arr = new Array(1000000);
-for (var i = 0; i < arr.length;  i = i + 1) {
- arr[i] = i;
+for (var i = 0; i < array.length;  i = i + 1) {
+ array[i] = i;
 }
 return performance.now() - start;
 
 }
 
 
-function normalLoop () {
-var start=performance.now();
+var columns =2000;
 
-var size =2000;
+var rows=16;
 
-var s=16;
+var ar = new Array(rows);
 
-var ar = new Array(s);
 
-for(var i =0;i<s;i++){
+for(var i =0;i<rows;i++){
 
-    ar[i]=new Array(size);
+   ar[i]=new Array(columns);
 
 }
 
-for(var i=0;i<size;i++){
 
-     for(var j=0;j<s;j++){
+
+function normalLoop () {
+var start=performance.now();
+
+
+for(var i=0;i<columns;i++){
+
+     for(var j=0;j<rows;j++){
 
      ar[j][i]=i;
 
@@ -68,52 +72,40 @@ function enumeratedLoop(){
 
 var start=performance.now();
 
-var size =2000;
 
-var s=16;
+for(var i=0;i<columns;i++){
 
-var ar1 = new Array(s);
+ar[0][i]=i;
 
+ar[1][i]=i;
 
-for(var i =0;i<s;i++){
+ar[2][i]=i;
 
-   ar1[i]=new Array(size);
+ar[3][i]=i;
 
-}
+ar[4][i]=i;
 
-for(var i=0;i<size;i++){
+ar[5][i]=i;
 
-ar1[0][i]=i;
+ar[6][i]=i;
 
-ar1[1][i]=i;
+ar[7][i]=i;
 
-ar1[2][i]=i;
+ar[8][i]=i;
 
-ar1[3][i]=i;
+ar[9][i]=i;
 
-ar1[4][i]=i;
+ar[10][i]=i;
 
-ar1[5][i]=i;
+ar[11][i]=i;
 
-ar1[6][i]=i;
+ar[12][i]=i;
 
-ar1[7][i]=i;
+ar[13][i]=i;
 
-ar1[8][i]=i;
+ar[14][i]=i;
 
-ar1[9][i]=i;
-
-ar1[10][i]=i;
-
-ar1[11][i]=i;
-
-ar1[12][i]=i;
-
-ar1[13][i]=i;
-
-ar1[14][i]=i;
-
-ar1[15][i]=i;
+ar[15][i]=i;
 
 }
 
@@ -123,20 +115,14 @@ return performance.now()-start;
 function dividedLoop() {
   var start = performance.now();
 
-  var rows = 16;
-  var columns = 2000;
   var updateStep = 4;
 
-  var array = new Array(rows);
-  for(var i = 0; i < rows; i++) {
-    array[i]= new Array(columns);
-  }
   for(var i = 0; i < rows; i += updateStep) {
     for(var j = 0; j < columns; j++) {
-      array[i][j] = j;
-      array[i + 1][j] = j;
-      array[i + 2][j] = j;
-      array[i + 3][j] = j;
+      ar[i][j] = j;
+      ar[i + 1][j] = j;
+      ar[i + 2][j] = j;
+      ar[i + 3][j] = j;
     }
   }
 
@@ -146,20 +132,9 @@ function dividedLoop() {
 function dividedLoop1() {
 var start=performance.now();
 
-var size =2000;
-
-var s=16;
-
-var ar = new Array(s);
 
 
-for(var i =0;i<s;i++){ 
-
-ar[i]=new Array(size);
-
-}
-
-for(var i=0;i<size;i++){ 
+for(var i=0;i<columns;i++){ 
 
 ar[0][i]=i; 
 
@@ -171,7 +146,7 @@ ar[3][i]=i;
 
 }
 
-for(var i=0;i<size;i++){
+for(var i=0;i<columns;i++){
 
 ar[4][i]=i; 
 
@@ -183,7 +158,7 @@ ar[7][i]=i;
 
 }
 
-for(var i=0;i<size;i++){
+for(var i=0;i<columns;i++){
 
 ar[8][i]=i; 
 
@@ -195,7 +170,7 @@ ar[11][i]=i;
 
 }
 
-for(var i=0;i<size;i++){
+for(var i=0;i<columns;i++){
 
 ar[12][i]=i;
 
