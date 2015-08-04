@@ -92,7 +92,31 @@ ar1[15][i]=i;
 
 return performance.now()-start;
 }
+
 function dividedLoop() {
+  var start = performance.now();
+
+  var rows = 16;
+  var columns = 2000;
+  var updateStep = 4;
+
+  var array = new Array(rows);
+  for(var i = 0; i < rows; i++) {
+    array[i]= new Array(columns);
+  }
+  for(var i = 0; i < rows; i += updateStep) {
+    for(var j = 0; j < columns; j++) {
+      array[i][j] = j;
+      array[i + 1][j] = j;
+      array[i + 2][j] = j;
+      array[i + 3][j] = j;
+    }
+  }
+
+  return performance.now() - start;
+}
+
+function dividedLoop1() {
 var start=performance.now();
 
 var size =2000;
