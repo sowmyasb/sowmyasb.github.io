@@ -6,8 +6,10 @@
 		<p>Single loop<span id="a"></span></p>
 		<p>Enumerated loop<span id="b"></span></p>
 		<p>divided loop<span id="c"></span></p>
-		<p>One for loop<span id="d"></span></p>
-		<p>Block One for loop<span id="e"></span></p>
+		<p>Normal Swapped loop<span id="d"></span></p>
+		<p>One for loop<span id="e"></span></p>
+		<p>Block One for loop<span id="f"></span></p>
+
 	</body>
     <script>
 		console.log('single loop');
@@ -67,6 +69,16 @@
 		for(var i=0;i<columns;i++){
 		     for(var j=0;j<rows;j++){
 		     ar[j][i].id= 1;
+		    }
+		}
+		return (performance.now()-start);
+		}
+
+		function normalSwappedLoop () {
+		var start=performance.now();
+		for(var i=0;i<rows;i++){
+		     for(var j=0;j<columns;j++){
+		     ar[i][j].id= 1;
 		    }
 		}
 		return (performance.now()-start);
@@ -180,7 +192,7 @@
 		return performance.now()-start;
 		}
 
-		var single=0, enumer = 0, divided =0, one=0, blockOne=0;
+		var single=0, enumer = 0, divided =0, one=0, blockOne=0, swapped=0;
 		for (var i=1;i<=200;i++){
 			blockOne += singleBlockLoop();
 			one += singleLoop();
@@ -189,20 +201,23 @@
 			single+=normalLoop();
 			enumer+=enumeratedLoop();
 			divided+=dividedLoop();
-
+            swapped+=normalSwappedLoop();
 			single+=normalLoop();
 			divided+=dividedLoop();
+			swapped+=normalSwappedLoop();
 			enumer+=enumeratedLoop();
 
-
+			swapped+=normalSwappedLoop();
 			divided+=dividedLoop();
 			enumer+=enumeratedLoop();
 			single+=normalLoop();
 
+			swapped+=normalSwappedLoop();
 			divided+=dividedLoop();
 			single+=normalLoop();
 			enumer+=enumeratedLoop();
 
+			swapped+=normalSwappedLoop();
 			enumer+=enumeratedLoop();
 			divided+=dividedLoop();
 			single+=normalLoop();
@@ -210,7 +225,7 @@
 			enumer+=enumeratedLoop();
 			single+=normalLoop();
 			divided+=dividedLoop();
-
+			swapped+=normalSwappedLoop();
 			one += singleLoop();
 			blockOne += singleBlockLoop();
 		}
@@ -221,7 +236,8 @@
 		document.getElementById('a').innerHTML = " = "+single;
 		document.getElementById('b').innerHTML = " = "+enumer;
 		document.getElementById('c').innerHTML = " = "+divided;
-		document.getElementById('d').innerHTML = " = "+one;
-		document.getElementById('e').innerHTML = " = "+blockOne;
+		document.getElementById('d').innerHTML = " = "+swapped;
+		document.getElementById('e').innerHTML = " = "+one;
+		document.getElementById('f').innerHTML = " = "+blockOne;
 	</script>
 </html>
