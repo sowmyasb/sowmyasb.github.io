@@ -55,7 +55,7 @@ function nestedLoop() {
 }
 
 
-function runMany(fn, times, name) {
+function runMany(fn, times) {
   var start = window.performance.now();
   for (var i = 0; i < times; i++) {
     fn();
@@ -65,10 +65,10 @@ function runMany(fn, times, name) {
 
 
 function testNestedLoop() {
-  return runMany(nestedLoop, 2000, 'nested');
+  return runMany(nestedLoop, 2000);
 }
 
 
 function testBlockedNestedLoop() {
-  return runMany(blockedNestedLoop, 2000, 'blocked');
+  return runMany(blockedNestedLoop, 2000);
 }
