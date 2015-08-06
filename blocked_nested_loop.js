@@ -27,18 +27,19 @@ function setUp() {
 
 function blockedNestedLoop() {
   var sum = 0;
+  var currentBlock = 0;
   var blockSize = 200;
-  var bk = 0;
-  var ceil = Math.ceil(rightCol / blockSize);
-  for (; bk < ceil; bk++) {
+  var blockCount = Math.ceil(rightCol / blockSize);
+   while (currentBlock < blockCount) {
     for (var i = 0; i < leftCol; i++) {
-      for (var j = bk * blockSize;
-          j < (bk + 1) * blockSize && j < rightCol; j++) {
+      var limit = Math.min((currentBlock + 1) * blockSize, rightCol);
+      for (var j = currentBlock * blockSize; j < limit; j++) {
         if (ar1[i].id == ar2[j].id) {
-          sum += 1;
+          sum++;
         }
       }
     }
+    currentBlock++;
   }
 }
 
