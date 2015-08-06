@@ -4,11 +4,10 @@
 	</head>
 	<body>
 		<p>Single loop<span id="a"></span></p>
-		<p>Enumerated loop<span id="b"></span></p>
-		<p>divided loop<span id="c"></span></p>
-		<p>Normal Swapped loop<span id="d"></span></p>
-		<p>One for loop<span id="e"></span></p>
-		<p>Block One for loop<span id="f"></span></p>
+		<p>divided loop<span id="b"></span></p>
+		<p>Normal Swapped loop<span id="c"></span></p>
+		<p>Nested Loop<span id="d"></span></p>
+		<p>Block Nested Loop<span id="e"></span></p>
 
 	</body>
     <script>
@@ -25,7 +24,7 @@
 		   array[i]=new Employee();
 		}
 
-		function singleBlockLoop(){
+		function nestedBlockedLoop(){
 
 		var start = performance.now();
 		for (var i = 0; i < array.length;  i = i + 5) {
@@ -37,7 +36,7 @@
 		}
 		return performance.now() - start;
 		}
-		function singleLoop(){
+		function nestedLoop(){
 			
 		var start = performance.now();
 		for (var i = 0; i < array.length;  i = i + 1) {
@@ -56,14 +55,22 @@
 		var columns =2000;
 		var rows=16;
 		var ar = new Array(rows);
+
 		for(var i =0;i<rows;i++){
 		   ar[i]=new Array(columns);
 		   for(var j=0;j<columns;j++){
 				ar[i][j]=new Employee();
 		   }
 		}
-
-
+ 
+        var ar1 = new Array(columns);
+        var ar2 = new Array(columns);
+        var cols = 2000;
+        for(var j=0;j<cols;j++){
+		  ar1[j]=new Employee();
+		  ar2[j]=new Employee();
+		}
+        
 		function normalLoop () {
 		var start=performance.now();
 		for(var i=0;i<columns;i++){
@@ -84,47 +91,34 @@
 		return (performance.now()-start);
 		}
 
-
-		function enumeratedLoop(){
+        function nestedLoop () {
 		var start=performance.now();
-		for(var i=0;i<columns;i++){
+		var sum =0;
 
-			ar[0][i].id=i;
-
-			ar[1][i].id=i;
-
-			ar[2][i].id=i;
-
-			ar[3][i].id=i;
-
-			ar[4][i].id=i;
-
-			ar[5][i].id=i;
-
-			ar[6][i].id=i;
-
-			ar[7][i].id=i;
-
-			ar[8][i].id=i;
-
-			ar[9][i].id=i;
-
-			ar[10][i].id=i;
-
-			ar[11][i].id=i;
-
-			ar[12][i].id=i;
-
-			ar[13][i].id=i;
-
-			ar[14][i].id=i;
-
-			ar[15][i].id=i;
-
+		for(var i=0;i<cols;i++){
+		     for(var j=0;j<cols;j++){
+		      if (ar1[i].id == ar2[j].id){
+                  sum++;
+		      }
+		    }
 		}
-		return performance.now()-start;
+		return (performance.now()-start);
 		}
 
+        function nestedBlockedLoop () {
+		var start = performance.now();
+		var sum=0;
+		  for(var bk=0; bk<Math.ceil(columns/1000); bk++){
+			  for(var i = 0; i < columns; i++) {
+			    for(var j = bk*4; j < (bk+1)*4; j++) {
+					 if (ar1[i].id == ar2[j].id){
+		                  sum+=1;
+				      }
+				}
+			  }
+		   }
+		  return performance.now() - start;
+		}
 
 		function dividedLoop() {
 		  var start = performance.now();
@@ -140,104 +134,45 @@
 		  return performance.now() - start;
 		}
 
-
-		function dividedLoop1() {
-		var start=performance.now();
-		for(var i=0;i<columns;i++){ 
-
-			ar[0][i].id=i; 
-
-			ar[1][i].id=i; 
-
-			ar[2][i].id=i;
-
-			ar[3][i].id=i;
-
-		}
-
-		for(var i=0;i<columns;i++){
-
-		ar[4][i].id=i; 
-
-		ar[5][i].id=i; 
-
-		ar[6][i].id=i;
-
-		ar[7][i].id=i;
-
-		}
-
-		for(var i=0;i<columns;i++){
-
-		ar[8][i].id=i; 
-
-		ar[9][i].id=i; 
-
-		ar[10][i].id=i; 
-
-		ar[11][i].id=i;
-
-		}
-
-		for(var i=0;i<columns;i++){
-
-		ar[12][i].id=i;
-
-		ar[13][i].id=i;
-		ar[14][i].id=i;
-
-		ar[15][i].id=i;
-		}
-
-		return performance.now()-start;
-		}
-
-		var single=0, enumer = 0, divided =0, one=0, blockOne=0, swapped=0;
+		var single=0, divided =0, nested=0, blocknested=0, swapped=0;
 		for (var i=1;i<=200;i++){
-			blockOne += singleBlockLoop();
-			one += singleLoop();
+			blocknested += nestedBlockedLoop();
+			nested += nestedLoop();
 
 
 			single+=normalLoop();
-			enumer+=enumeratedLoop();
 			divided+=dividedLoop();
             swapped+=normalSwappedLoop();
 			single+=normalLoop();
 			divided+=dividedLoop();
 			swapped+=normalSwappedLoop();
-			enumer+=enumeratedLoop();
 
 			swapped+=normalSwappedLoop();
 			divided+=dividedLoop();
-			enumer+=enumeratedLoop();
+			single+=normalLoop();
+
+			swapped+=normalSwappedLoop();
+			divided+=dividedLoop();
 			single+=normalLoop();
 
 			swapped+=normalSwappedLoop();
 			divided+=dividedLoop();
 			single+=normalLoop();
-			enumer+=enumeratedLoop();
 
-			swapped+=normalSwappedLoop();
-			enumer+=enumeratedLoop();
-			divided+=dividedLoop();
-			single+=normalLoop();
-
-			enumer+=enumeratedLoop();
 			single+=normalLoop();
 			divided+=dividedLoop();
 			swapped+=normalSwappedLoop();
-			one += singleLoop();
-			blockOne += singleBlockLoop();
+			nested += nestedLoop();
+			blocknested += nestedBlockedLoop();
 		}
 
 		/*single/=120;
 		enumer/=120;
 		divided/=120;*/
 		document.getElementById('a').innerHTML = " = "+single;
-		document.getElementById('b').innerHTML = " = "+enumer;
-		document.getElementById('c').innerHTML = " = "+divided;
-		document.getElementById('d').innerHTML = " = "+swapped;
-		document.getElementById('e').innerHTML = " = "+one;
-		document.getElementById('f').innerHTML = " = "+blockOne;
+		document.getElementById('b').innerHTML = " = "+divided;
+		document.getElementById('c').innerHTML = " = "+swapped;
+		document.getElementById('d').innerHTML = " = "+nested;
+		document.getElementById('e').innerHTML = " = "+blocknested;
 	</script>
 </html>
